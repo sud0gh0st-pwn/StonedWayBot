@@ -1,0 +1,6 @@
+venv
+frontend/telegram-webapp-front/node_modules
+backend/telegram_project/telegram_app/__pycache__
+backend/telegram_project/telegram_app/migrations
+backend/telegram_project/media
+backend/telegram_project/db.sqlite3

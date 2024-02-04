@@ -1,0 +1,6 @@
+{
+    "TELEGRAM_BOT_TOKEN": "your-telegram-bot-token",
+    "ADMIN_SETUP_PASSWORD": "your-setup-password",
+    "DJANGO_SECRET_KEY": "your-django-secret-key",
+    "ADMIN_ID": null
+}
