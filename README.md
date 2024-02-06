@@ -34,7 +34,7 @@ docker-compose --version
 sudo usermod -aG docker ${USER}
 su - ${USER}
 groups
-git clone https://github.com/sud0gh0st-pwn/StonedWayBot.git
+git clone https://github.com/sud0gh0st-pwn/TG-Vendor-MiniApp.git
 cd StonedWayBot
 ```
 

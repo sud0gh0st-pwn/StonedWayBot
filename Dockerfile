@@ -1,5 +1,5 @@
 # Use the latest Ubuntu LTS as base image
-FROM ubuntu:minimal
+FROM ubuntu:latest
 
 # Run updates and install necessary packages
 RUN apt-get update && apt-get upgrade -y \
@@ -21,10 +21,10 @@ RUN useradd -m webServe
 WORKDIR /home/webServe
 
 # Clone the repository
-RUN git clone https://github.com/sud0gh0st-pwn/StonedWayBot.git
+RUN git clone https://github.com/sud0gh0st-pwn/TG-Vendor-MiniApp.git
 
 # Change Dir to project root
-WORKDIR /home/webServe/StonedWayBot
+WORKDIR /home/webServe/TG-Vendor-MiniApp
 
 # Switch to root to modify Nginx configuration
 USER root
@@ -38,16 +38,20 @@ RUN rm /etc/nginx/sites-enabled/default
 USER webServe
 
 # Change directory to the frontend directory
-WORKDIR /home/webServe/StonedWayBot/frontend/telegram-webapp-front
+WORKDIR /home/webServe/TG-Vendor-MiniApp/frontend/telegram-webapp-front
 
 # Install dependencies
 RUN npm install
 
 # Build your application if necessary
-RUN npm run build
+RUN npm install && \
+    npm run build && \
+    ls -l /home/webServe/TG-Vendor-MiniApp/frontend/telegram-webapp-front/dist
 
-# Copy the built files to Nginx's serve directory
-COPY ./frontend/telegram-webapp-front/dist /usr/share/nginx/html
+
+COPY ./telegram-webapp-front/dist /usr/share/nginx/html
+
+
 
 # Expose ports for Nginx
 EXPOSE 80 443
