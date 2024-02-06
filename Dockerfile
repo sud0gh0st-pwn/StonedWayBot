@@ -1,5 +1,5 @@
 # Use the latest Ubuntu LTS as base image
-FROM ubuntu:latest
+FROM ubuntu:minimal
 
 # Run updates and install necessary packages
 RUN apt-get update && apt-get upgrade -y \

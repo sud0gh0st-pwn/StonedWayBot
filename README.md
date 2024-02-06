@@ -1,11 +1,52 @@
-# StonedWay TG Bot
 
-## 
-> Author : @sud0gh0st
-> Version : 1.0
-> Languages : Python, Vue.js, Vuetify, HTML, CSS, JS, Sqlite
+# A Telegram MiniApp For Vendors
 
-A bot made for the best 420 vendor on TG.
+## Overview
+This MiniApp is designed to help vendors manage their operations on Telegram. It features systems for content, order, client, channel, tracking, and touchdown management. 
+
+> **Author:** @sud0gh0st  
+> **Version:** 1.0  
+> **Languages:** Python, Vue.js, Vuetify, HTML, CSS, JS, Sqlite
+
+As a vendor, this MiniApp simplifies the management of various aspects of your business, enhancing efficiency and customer experience.
+
+## Prerequisites
+
+Before you begin, ensure you have Docker and Docker Compose installed on your VPS. These tools are essential for running the MiniApp in a containerized environment. For more information:
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+### On Your VPS (Linux suggested)
+Required:
+- Docker
+- Docker-compose
+
+```bash
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt update
+sudo apt install docker-ce
+sudo systemctl status docker
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+sudo usermod -aG docker ${USER}
+su - ${USER}
+groups
+git clone https://github.com/sud0gh0st-pwn/StonedWayBot.git
+cd StonedWayBot
+```
+
+Start the application with :
+```bash
+docker-compose up
+```
+
+Stop the application with :
+```bash
+docker-compose down
+```
 
 ## Features
 
