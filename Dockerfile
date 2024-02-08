@@ -1,4 +1,22 @@
-# Use the latest Ubuntu LTS as base image
+# Stage 1: Build the application
+FROM node:latest as builder
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package.json package-lock.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of your app's source code from your host to your image filesystem.
+COPY . .
+
+# Build the application
+RUN npm run build
+
+# Stage 2: Setup the Nginx server
 FROM ubuntu:latest
 
 # Run updates and install necessary packages
@@ -17,41 +35,13 @@ ENV PATH /root/.nvm/versions/node/v$NODE_VERSION/bin:$PATH
 # Create a non-root user
 RUN useradd -m webServe
 
-# Set the working directory
-WORKDIR /home/webServe
-
-# Clone the repository
-RUN git clone https://github.com/sud0gh0st-pwn/TG-Vendor-MiniApp.git
-
-# Change Dir to project root
-WORKDIR /home/webServe/TG-Vendor-MiniApp
-
-# Switch to root to modify Nginx configuration
-USER root
-
 # Copy the Nginx configuration file and create symlink
 COPY default.conf /etc/nginx/sites-available/default
 RUN ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 RUN rm /etc/nginx/sites-enabled/default
 
-# Switch back to non-root user
-USER webServe
-
-# Change directory to the frontend directory
-WORKDIR /home/webServe/TG-Vendor-MiniApp/frontend/telegram-webapp-front
-
-# Install dependencies
-RUN npm install
-
-# Build your application if necessary
-RUN npm install && \
-    npm run build && \
-    ls -l /home/webServe/TG-Vendor-MiniApp/frontend/telegram-webapp-front/dist
-
-
-COPY ./telegram-webapp-front/dist /usr/share/nginx/html
-
-
+# Copy the built files from the builder stage to Nginx's serve directory
+COPY --from=builder /app/dist /usr/share/nginx/html
 
 # Expose ports for Nginx
 EXPOSE 80 443
